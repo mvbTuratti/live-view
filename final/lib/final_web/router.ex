@@ -21,8 +21,6 @@ defmodule FinalWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    live "/light", LightLive
-    live "/git-repo", GitRepos
   end
 
   # Other scopes may use custom stacks.
@@ -68,10 +66,6 @@ defmodule FinalWeb.Router do
     post "/users/register", UserRegistrationController, :create
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
-    get "/users/reset_password", UserResetPasswordController, :new
-    post "/users/reset_password", UserResetPasswordController, :create
-    get "/users/reset_password/:token", UserResetPasswordController, :edit
-    put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
   scope "/", FinalWeb do
@@ -79,7 +73,8 @@ defmodule FinalWeb.Router do
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    live "/light", LightLive
+    live "/git-repo", GitRepos
   end
 
   scope "/", FinalWeb do
