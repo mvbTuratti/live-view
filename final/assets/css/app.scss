@@ -1,11 +1,15 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; 
 /* This file is for your main application CSS */
 @import "./live_view.scss";
 @import "./custom.scss";
 
 /* Alerts and form errors used by phx.new */
+p[role=alert]{
+  margin-left: 20%;
+  margin-right: 20%;
+}
 .alert {
   padding: 15px;
   margin-bottom: 20px;
