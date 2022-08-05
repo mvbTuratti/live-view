@@ -1,7 +1,6 @@
 defmodule FinalWeb.Chat do
   use FinalWeb, :live_view
 
-
   def mount(_,_, socket) do
     {:ok, socket}
   end
@@ -94,6 +93,7 @@ defmodule FinalWeb.Chat do
                             <div class="text-gray-500 text-xxs">#9899</div>
                         </div>
                     </div>
+                    <div><li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li></div>
                 </div>
             </div>
             <div class="flex-1 flex justify-between">
