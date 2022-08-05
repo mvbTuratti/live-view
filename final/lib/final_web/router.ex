@@ -64,6 +64,7 @@ defmodule FinalWeb.Router do
     put "/users/settings", UserSettingsController, :update
     live "/light", LightLive
     live "/git-repo", GitRepos
+    live "/chat", Chat
   end
 
   scope "/", FinalWeb do
