@@ -1,6 +1,8 @@
 defmodule FinalWeb.Chat do
   use FinalWeb, :live_view
 
+  alias FinalWeb.Router.Helpers, as: Routes
+
   def mount(_,_, socket) do
     socket = assign_default(socket)
     {:ok, socket, temporary_assigns: [group_chats: []]}
@@ -10,6 +12,5 @@ defmodule FinalWeb.Chat do
     assign(socket,
         group_chats: [{"abc-df", "light-on"}, {"sda-dew", "light-off"}]
     )
-
   end
 end

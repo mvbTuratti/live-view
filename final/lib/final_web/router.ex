@@ -20,7 +20,7 @@ defmodule FinalWeb.Router do
   scope "/", FinalWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", UserSessionController, :new
   end
 
   # Other scopes may use custom stacks.

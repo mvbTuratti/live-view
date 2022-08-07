@@ -23,6 +23,7 @@
                     <div class="text-xs ml-2">
                         <div class="text-white">mvbTuratti</div>
                         <div class="text-gray-500 text-xxs">#9899</div>
+                        <div class="text-red-500 text-xxs"><%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %></div>
                     </div>
                 </div>
                 <div class="flex h-12 items-center">
