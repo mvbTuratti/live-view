@@ -1,16 +1,17 @@
 defmodule FinalWeb.Chat do
-  use FinalWeb, :live_view
+    use FinalWeb, :live_view
 
-  alias FinalWeb.Router.Helpers, as: Routes
+    alias FinalWeb.Router.Helpers, as: Routes
+    alias Final.Chats
 
-  def mount(_,_, socket) do
-    socket = assign_default(socket)
-    {:ok, socket, temporary_assigns: [group_chats: []]}
-  end
+    def mount(_,_, socket) do
+        chats = Chats.list_chats()
+        socket =
+            assign(socket,
+                chats: chats,
+                selected_chat: hd(chats)
+            )
+        {:ok, socket, temporary_assigns: [group_chats: []]}
+    end
 
-  def assign_default(socket) do
-    assign(socket,
-        group_chats: [{"abc-df", "light-on"}, {"sda-dew", "light-off"}]
-    )
-  end
 end
