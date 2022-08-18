@@ -5,7 +5,10 @@ defmodule FinalWeb.Chat do
     alias Final.Chats
 
     def mount(_,_, socket) do
-        chats = Chats.list_chats()
+        #chats = Chats.list_chats()
+        chats = [%{id: "ssda-sda-ss",
+        avatar: "light-on"}, %{id: "ssda-sda-sss",
+        avatar: "light-off"}]
         socket =
             assign(socket,
                 chats: chats,

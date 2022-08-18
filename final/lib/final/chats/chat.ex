@@ -6,6 +6,9 @@ defmodule Final.Chats.Chat do
     field :name, :string
     field :avatar, :string
 
+    has_many :chat_line, Final.ChatLines.ChatLine
+    belongs_to :user, Final.Accounts.User
+
     timestamps()
   end
 
@@ -14,5 +17,6 @@ defmodule Final.Chats.Chat do
     chat
     |> cast(attrs, [:name, :avatar])
     |> validate_required([:name, :avatar])
+    |> unique_constraint(:name)
   end
 end
