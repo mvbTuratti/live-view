@@ -5,7 +5,6 @@ defmodule Final.Chats do
 
   import Ecto.Query, warn: false
   alias Final.Repo
-
   alias Final.Chats.Chat
 
   @doc """
@@ -21,6 +20,12 @@ defmodule Final.Chats do
     Repo.all(Chat)
   end
 
+  def list_user_chats(user_id) do
+    query =
+      from chat in Chat, where: chat.user_id == ^user_id,
+        select: chat
+    Repo.all(query)
+  end
   @doc """
   Gets a single chat.
 

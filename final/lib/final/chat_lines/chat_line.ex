@@ -12,7 +12,7 @@ defmodule Final.ChatLines.ChatLine do
   end
 
   @doc false
-  def changeset(chat_line, attrs) do
+  def changeset(chat_line, attrs \\ %{}) do
     chat_line
     |> cast(attrs, [:user_name, :line_text])
     |> validate_required([:user_name, :line_text])

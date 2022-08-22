@@ -12,21 +12,11 @@
 alias Final.Repo
 alias Final.Chats.Chat
 alias Final.ChatLines.ChatLine
+alias Final.Accounts
 
 
 %Chat{
-  name: "ssda-sda-ss",
-  avatar: "light-on",
-  chat_line: [
-    %ChatLine{
-      line_text: "this is a simple line test",
-      user_name: "pedrinho123"
-    }
-  ]
-}
-|> Repo.insert!()
-
-%Chat{
+  user: Accounts.get_user!(1),
   name: "sa-sda-ss",
   avatar: "light-off",
   chat_line: [

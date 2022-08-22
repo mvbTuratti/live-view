@@ -3,26 +3,28 @@ defmodule FinalWeb.Chat do
 
     alias FinalWeb.Router.Helpers, as: Routes
     alias Final.Chats
+    alias Final.ChatLines.ChatLine
 
-    def mount(_,_, socket) do
-        #chats = Chats.list_chats()
-        chats = [%{id: "ssda-sda-ss",
-        avatar: "light-on"}, %{id: "ssda-sda-sss",
-        avatar: "light-off"}]
+    def mount(_, %{"user_id" => id}, socket) do
+        chats = Chats.list_user_chats(id) || []
+        changeset = ChatLine.changeset(%ChatLine{}, %{})
         socket =
             assign(socket,
+                user_id: id,
                 chats: chats,
-                selected_chat: hd(chats)
+                selected_chat: head(chats),
+                changeset: changeset
             )
-        {:ok, socket, temporary_assigns: [group_chats: []]}
+        {:ok, socket, temporary_assigns: [chats: []]}
     end
 
     def handle_params(%{"id" => id}, _, socket) do
       id = String.to_integer(id)
-
+      chats = Chats.list_user_chats(socket.assigns.user_id) || []
       chat = Chats.get_chat!(id)
       socket =
         assign(socket,
+        chats: chats,
         selected_chat: chat,
         page_title: "Chat #{chat.name}")
       {:noreply, socket}
@@ -38,4 +40,7 @@ defmodule FinalWeb.Chat do
         <img src={"images/#{@avatar}.svg"} alt="discord" class="w-12 h-12 rounded-full mx-auto p-2">
         """
     end
+
+    defp head([]), do: nil
+    defp head([h | _]), do: h
 end
