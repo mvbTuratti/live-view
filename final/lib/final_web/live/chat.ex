@@ -4,15 +4,21 @@ defmodule FinalWeb.Chat do
     alias FinalWeb.Router.Helpers, as: Routes
     alias Final.Chats
     alias Final.ChatLines.ChatLine
+    alias Phoenix.LiveView.JS
+    alias Final.Accounts
+    alias Final.ChatLines
 
     def mount(_, %{"user_id" => id}, socket) do
         chats = Chats.list_user_chats(id) || []
         changeset = ChatLine.changeset(%ChatLine{}, %{})
+        user = Accounts.get_nickname!(id)
+        IO.inspect(head(chats))
         socket =
             assign(socket,
                 user_id: id,
                 chats: chats,
                 selected_chat: head(chats),
+                nickname: user,
                 changeset: changeset
             )
         {:ok, socket, temporary_assigns: [chats: []]}
@@ -31,6 +37,22 @@ defmodule FinalWeb.Chat do
     end
 
     def handle_params(_param, _, socket) do
+      {:noreply, socket}
+    end
+
+    def handle_event("save_line", %{"line" => line}, socket) do
+      #preload = Chats.preload_chat(socket.assigns.selected_chat.id, :chat_line)
+      change = %{user_name: socket.assigns.nickname, line_text: line, chat_id: socket.assigns.selected_chat.id}
+      case ChatLines.create_chat_line(change) do
+        {:ok, v} -> IO.inspect(v) #adicionar ao chat...
+        {:error, er} -> IO.inspect(er)
+      end
+
+      {:noreply, socket}
+    end
+
+    def handle_event("confirmation", _, socket) do
+
       {:noreply, socket}
     end
 

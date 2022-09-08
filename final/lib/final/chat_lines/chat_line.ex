@@ -14,7 +14,14 @@ defmodule Final.ChatLines.ChatLine do
   @doc false
   def changeset(chat_line, attrs \\ %{}) do
     chat_line
-    |> cast(attrs, [:user_name, :line_text])
-    |> validate_required([:user_name, :line_text])
+    |> cast(attrs, [:user_name, :line_text, :chat_id])
+    |> validate_required([:user_name, :line_text, :chat_id])
+    |> cast_assoc(:chat)
+    #|> put_change(:chat, attrs.id)
+  end
+
+  def set_chat_changeset(struct, attrs \\ %{}) do
+    struct
+    |> cast(attrs,[:chat_id])
   end
 end

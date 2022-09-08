@@ -60,6 +60,16 @@ defmodule Final.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_nickname!(id) do
+    email = User
+      |> where([u], u.id == ^id)
+      |> select([u], u.email)
+      |> Repo.one()
+
+    [nickname | _] = String.split(email, "@")
+    nickname
+  end
+
   ## User registration
 
   @doc """

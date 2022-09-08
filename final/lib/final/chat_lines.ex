@@ -101,4 +101,8 @@ defmodule Final.ChatLines do
   def change_chat_line(%ChatLine{} = chat_line, attrs \\ %{}) do
     ChatLine.changeset(chat_line, attrs)
   end
+
+  def preload_chat(%ChatLine{} = chat, :chat_line) do
+    Repo.preload(chat, :chat_line)
+  end
 end

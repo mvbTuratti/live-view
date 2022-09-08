@@ -106,4 +106,6 @@ defmodule Final.Chats do
   def change_chat(%Chat{} = chat, attrs \\ %{}) do
     Chat.changeset(chat, attrs)
   end
+
+
 end
